@@ -64,7 +64,7 @@ const buildChartData = (data, casesType) => {
   return chartData
 }
 
-const LineGraph = ({ casesType = 'cases' }) => {
+const LineGraph = ({ casesType = 'cases', ...props }) => {
   const [data, setData] = useState({})
 
   // Loads when component change
@@ -77,7 +77,7 @@ const LineGraph = ({ casesType = 'cases' }) => {
         response.json().then(data => {
           let chartData = buildChartData(data, casesType)
           setData(chartData)
-          console.log(data)
+          // console.log(data)
         })
       )
     }
@@ -86,7 +86,7 @@ const LineGraph = ({ casesType = 'cases' }) => {
   }, [casesType])
 
   return (
-    <div>
+    <div className={props.className}>
       {data?.length > 0 && (
         <Line
           options={options}

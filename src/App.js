@@ -48,7 +48,7 @@ function App() {
             name: country.country, // United states, United kingdom
             value: country.countryInfo.iso2, // United states, United kingdom
           }))
-          const sortedData = sortData(data)
+          let sortedData = sortData(data)
           setTableData(sortedData)
           setMapCountries(data)
           setCountries(countries)
@@ -78,7 +78,7 @@ function App() {
       })
   }
 
-  console.log('COUNTRY INFO>>>', countryInfo)
+  // console.log('COUNTRY INFO>>>', countryInfo)
 
   return (
     <div className='app'>
@@ -93,7 +93,9 @@ function App() {
             >
               <MenuItem value='worldwide'>Worldwide</MenuItem>
               {countries.map(country => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem key={country} value={country.value}>
+                  {country.name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -135,8 +137,8 @@ function App() {
         <CardContent>
           <h3>Live cases by Country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new {casesType}</h3>
-          <LineGraph casesType={casesType} />
+          <h3 className='app__graphTitle'>Worldwide new {casesType}</h3>
+          <LineGraph className='app__graph' casesType={casesType} />
         </CardContent>
       </Card>
     </div>
