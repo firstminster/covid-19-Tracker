@@ -48,7 +48,7 @@ const options = {
 }
 
 // calculates the number of new cases
-const buildChartData = (data, casesType = 'cases') => {
+const buildChartData = (data, casesType) => {
   const chartData = []
   let lastDataPoint
   for (let date in data.cases) {
@@ -75,9 +75,9 @@ const LineGraph = ({ casesType = 'cases' }) => {
         'https://disease.sh/v3/covid-19/historical/all?lastdays=120'
       ).then(response =>
         response.json().then(data => {
-          console.log(data)
           let chartData = buildChartData(data, casesType)
           setData(chartData)
+          console.log(data)
         })
       )
     }
